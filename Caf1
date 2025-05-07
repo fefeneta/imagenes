@@ -1,0 +1,95 @@
+import tkinter as tk  # Tkinter para la ventana
+from urllib.request import urlopen  # Para descargar la imagen desde internet
+from PIL import Image, ImageTk  # Pillow para trabajar con imágenes
+from io import BytesIO  # Para convertir los datos de la imagen
+
+def descargarImagenFondo():
+    urlImagen = "https://github.com/rodripiersi/Imagenes/blob/main/Portada.png?raw=true"
+    datosImagen = urlopen(urlImagen)  # Descargar la imagen
+    imagenBinaria = datosImagen.read()  # Obtener los datos de la imagen
+    # Paso 2: Convertir los datos binarios en una imagen que podamos mostrar
+    imagen = Image.open(BytesIO(imagenBinaria))
+    return imagen
+
+def descargarImagenCafeteraCapsulas():
+    urlImagen = "https://github.com/rodripiersi/Imagenes/blob/main/Portada.png?raw=true"
+    datosImagen = urlopen(urlImagen)  # Descargar la imagen
+    imagenBinaria = datosImagen.read()  # Obtener los datos de la imagen
+    # Paso 2: Convertir los datos binarios en una imagen que podamos mostrar
+    imagen = Image.open(BytesIO(imagenBinaria))
+    return imagen
+
+
+def mostrarCafeteradecapsulas():
+    limpiarVentana()
+    label = tk.Label(ventana, text="Elegiste la Cafetera de capsulas", font=("Arial", 16))
+    label.pack(pady=20)
+
+    boton_volver = tk.Button(ventana, text="Volver", font=("Arial", 12), command=mostrarMenu)
+    boton_volver.pack(pady=10)
+
+def mostrarCafeteraitaliana():
+    limpiarVentana()
+    label = tk.Label(ventana, text="Elegiste la Cafetera italiana", font=("Arial", 16))
+    label.pack(pady=20)
+
+    boton_volver = tk.Button(ventana, text="Volver", font=("Arial", 12), command=mostrarMenu)
+    boton_volver.pack(pady=10)
+    
+def mostrarCafeteradeexpresso():
+    limpiarVentana()
+    label = tk.Label(ventana, text= "Elegiste la Cafetera de expresso", font=("Arial", 16))
+    label.pack(pady=20)
+
+    boton_volver = tk.Button(ventana, text="Volver", font=("Arial", 12), command=mostrarMenu)
+    boton_volver.pack(pady=10)
+
+def mostrarCafeterachemex():
+    limpiarVentana()
+    label = tk.Label(ventana, text="Elegiste la Cafetera chemex", font=("Arial", 16))
+    label.pack(pady=20)
+
+    boton_volver = tk.Button(ventana, text="Volver", font=("Arial", 12), command=mostrarMenu)
+    boton_volver.pack(pady=10)
+
+def limpiarVentana():  
+    for widget in ventana.winfo_children():  
+        widget.destroy()
+
+        
+def mostrarMenu():
+    limpiarVentana()
+    label = tk.Label(ventana, text="Menú Principal", font=("Arial", 18, "bold"))
+    label.pack(pady=20)
+
+    boton1 = tk.Button(ventana, text="Cafetera de capsulas", font=("Arial", 14), width=20, command=mostrarCafeteradecapsulas)
+    boton1.pack(pady=10)
+
+    boton2 = tk.Button(ventana, text= "Cafetera italiana", font=("Arial", 14), width=20, command=mostrarCafeteraitaliana)
+    boton2.pack(pady=10)
+    
+    boton3 = tk.Button(ventana, text="Cafetera de expresso", font=("Arial", 14), width=20, command=mostrarCafeteradeexpresso)
+    boton3.pack(pady=10)
+
+    boton4 = tk.Button(ventana, text="Cafetera chemex", font=("Arial", 14), width=20, command=mostrarCafeterachemex)
+    boton4.pack(pady=10)
+
+def main():
+    global ventana
+    ventana = tk.Tk()
+    ventana.geometry("400x300")
+    ventana.title("Menú Centrado")
+
+    imagen=descargarImagenFondo()
+    imagenRedimensionada = imagen.resize(ancho, alto)
+    imagenTk = ImageTk.PhotoImage(imagenRedimensionada)
+    etiqueta = tk.Label(ventana, image=imagenTk)
+    etiqueta.pack()  # Colocar la etiqueta en la ventana
+
+    
+    mostrarMenu()
+
+    ventana.mainloop()
+
+if __name__=="__main__":
+    main()
